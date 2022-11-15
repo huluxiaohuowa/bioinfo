@@ -1,12 +1,11 @@
 import os
 import cv2
-import argparse
 import numpy as np
 import openslide
-from distutils.util import strtobool
+# from distutils.util import strtobool
 from tqdm.autonotebook import tqdm
 import pandas as pd
-from jupyfuncs.glob import makedirs
+# from jupyfuncs.glob import makedirs
 
 
 def makedirs(path: str, isfile: bool = False) -> None:
@@ -65,7 +64,7 @@ print(f"Number of rows in txt file ：{len(dataset)}")
 
 for row in tqdm(dataset):
     fname, label, missing, x, y = row
-    if(not missing):
+    if not missing:
         x = (float(x) * ratio_x) + bounds_x
         y = (float(y) * ratio_y) + bounds_y
         print(f"Extracting spot {label} at location", (x, y))
@@ -75,12 +74,12 @@ for row in tqdm(dataset):
         )
         tmaspot = np.asarray(
             slide.read_region(
-                (int(x - tmaspot_size*0.5), int(y-tmaspot_size*0.5)),
+                (int(x - tmaspot_size * 0.5), int(y - tmaspot_size * 0.5)),
                 level,
                 (8500, 8500)
             )
         )[:, :, 0:3]
-        tmaspot = cv2.cvtColor(tmaspot,cv2.COLOR_RGB2BGR)
+        tmaspot = cv2.cvtColor(tmaspot, cv2.COLOR_RGB2BGR)
         cv2.imwrite(f"{outdir}/{label}.png", tmaspot)
     else:
         print(f'The spot {label} is missing, skipping!')
