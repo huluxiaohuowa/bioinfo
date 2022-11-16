@@ -1,5 +1,7 @@
 exp <- matrix(rnorm(300), nrow = 30, ncol = 10)
 
+View(exp)
+
 exp[1:15, 1:5] <- exp[
         1:15, 1:5
     ] + matrix(
@@ -16,7 +18,6 @@ colnames(exp) <- paste("Sample", 1:10, sep = "")
 rownames(exp) <- paste("Gene", 1:30, sep = "")
 head(exp)
 
-View(exp)
 
 library(pheatmap)
 ph <- pheatmap(exp)
@@ -28,4 +29,7 @@ ph_exp <- exp[
     ph$tree_row$order, ph$tree_col$order
 ]
 
-ph_exp[1:4, 1:4]
+
+ph_exp[1:4, 1:4] 
+ph_exp
+View(ph)
