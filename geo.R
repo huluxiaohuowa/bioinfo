@@ -113,6 +113,8 @@ annos <- dplyr::select(
     "Representative Public ID"
 )
 
+View(fit2)
+
 fit2$genes <- anno
 topTable(fit2)
 full_results <- topTable(
@@ -133,3 +135,32 @@ fc_cutoff <- 1
 full_results %>%  # nolint
   mutate(Significant = adj.P.Val < p_cutoff, abs(logFC) > fc_cutoff) %>% 
   ggplot(aes(x = logFC, y = B, col=Significant)) + geom_point()
+
+
+library(ggrepel)
+p_cutoff <- 0.05
+fc_cutoff <- 1
+topN <- 40
+
+full_results %>% 
+  mutate(Significant = adj.P.Val < p_cutoff, abs(logFC) > fc_cutoff ) %>% 
+  mutate(Rank = 1: n(), Label = ifelse(Rank < topN, GB_ACC,"")) %>% 
+  ggplot(aes(x = logFC, y = B, col=Significant,label=Label)) + geom_point() + geom_text_repel(col="black")
+
+class(full_results)
+
+filter(full_results, Gene.Symbol == "Bcl2a1")
+
+write.table(
+    full_results,
+    file = "results.csv",
+    quote = FALSE,
+    sep = "\t"
+)
+
+write.table(
+    anno,
+    file = "anno.csv",
+    quote = FALSE,
+    sep = "\t"
+)
