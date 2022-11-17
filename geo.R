@@ -130,6 +130,6 @@ ggplot(full_results,aes(x = logFC, y=B)) + geom_point()
 p_cutoff <- 0.05
 fc_cutoff <- 1
 
-full_results %>% 
-  mutate(Significant = adj.P.Val < p_cutoff, abs(logFC) > fc_cutoff ) %>% 
+full_results %>%  # nolint
+  mutate(Significant = adj.P.Val < p_cutoff, abs(logFC) > fc_cutoff) %>% 
   ggplot(aes(x = logFC, y = B, col=Significant)) + geom_point()
