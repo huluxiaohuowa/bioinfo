@@ -1,18 +1,18 @@
 library(GEOquery)
-my_id <- "GSE17891"
+my_id <- "GSE21166"
 gse_la <- getGEO(my_id)
 
 length(gse_la)
 
-gse <- gse_la[[2]]
+gse <- gse_la[[1]]
 
-sam <- pData(gse) ## print the sample information
-anno <- fData(gse) ## print the gene annotation
-ex <-  exprs(gse) ## print the expression data
+sam <- pData(gse) ## the sample information
+anno <- fData(gse) ## the gene annotation
+ex <-  exprs(gse) ## the expression data
 
 summary(exprs(gse))
 exprs(gse) <- log2(exprs(gse))
-boxplot(exprs(gse), outline=FALSE)
+boxplot(exprs(gse), outline = FALSE)
 
 library(dplyr)
 
