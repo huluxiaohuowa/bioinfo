@@ -9,6 +9,7 @@ length(gse_la)
 gse <- gse_la[[1]]
 
 sam <- pData(gse) ## the sample information
+View(sam)
 anno <- fData(gse) ## the gene annotation
 ex <-  exprs(gse) ## the expression data
 summary(exprs(gse))
@@ -18,7 +19,7 @@ View(gse)
 summary(exprs(gse))
 exprs(gse) <- log2(exprs(gse))
 boxplot(exprs(gse), outline = FALSE)
-
+View(p)
 library(dplyr)
 
 sample_info <- pData(gse)
