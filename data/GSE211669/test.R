@@ -62,16 +62,27 @@ df4 <- df3 %>% mutate(
 
 table(df4["GeneID"])
 
-unlist(strsplit(
-    "sdfsdf|sdfsdf|sdf",
-    split = "\\|"
-))[-3: -2]
+tdf1 <- filter(df1, GeneID == "BCL2A1")
+tdf2 <- filter(df4, GeneID == "BCL2A1")
 
-df3["GeneID"]
+write.table(
+    tdf1,
+    file = "data/tdf1.tsv",
+    sep = "\t"
+)
 
-strsplit(
-    df3["GeneID"],
-    split = "\\|"
-)[[1]][-3: -2]
+write.table(
+    tdf2,
+    file = "data/tdf2.tsv",
+    sep = "\t"
+)
 
-table(df3["GeneID_new"])
+tdf1 <- read.table(
+    "data/tdf1.tsv",
+    sep = "\t"
+)
+
+tdf2 <- read.table(
+    "data/tdf2.tsv",
+    sep = "\t"
+)
