@@ -28,6 +28,8 @@ pdata1 <- pData(gse_la[[1]])
 pdata2 <- pData(gse_la[[2]])
 pdata3 <- pData(gse_la2[[1]])
 
+exprs(gse_la[[2]])
+
 pdata1
 pdata2
 pdata3
@@ -52,6 +54,7 @@ temp <- seq(
     by = 9,
     length.out = nrow(df3)
 )
+
 df4 <- df3 %>% mutate(
     df3,
     GeneID = unlist(strsplit(
@@ -95,8 +98,63 @@ test_df <- read.table(
 )
 ggplot(
     data = test_df,
-    aes(x = group,
+    aes(
+        x = group,
         y = value,
-        color = group)
-)   +
-  geom_jitter()
+        color = group
+    )
+) +
+    geom_jitter()
+
+pdata1_sts <- filter(
+    pdata1,
+    pdata1["survival group:ch1"] == "STS",
+)
+
+pdata1_mts <- filter(
+    pdata1,
+    pdata1["survival group:ch1"] == "MTS",
+)
+
+pdata1_lts <- filter(
+    pdata1,
+    pdata1["survival group:ch1"] == "LTS",
+)
+
+pdata2_lts <- filter(
+    pdata2_1,
+    pdata2_1["survival group:ch1"] == "LTS"
+)
+
+pdata1_lts <- select(
+    pdata1_lts,
+    geo_accession,
+    "survival group:ch1",
+    "tissue:ch1"
+)
+
+pdata2_lts <- select(
+    pdata2_lts,
+    geo_accession,
+    "survival group:ch1",
+    "tissue:ch1"
+)
+
+pdata12_lts <- rbind(pdata1_lts, pdata2_lts)
+
+pdata12_sts <- select(
+    pdata1_sts,
+    geo_accession,
+    "survival group:ch1",
+    "tissue:ch1"
+)
+
+pdata12_mts <- select(
+    pdata1_mts,
+    geo_accession,
+    "survival group:ch1",
+    "tissue:ch1"
+)
+rownames(pdata12_sts)
+
+select(tdf1, rownames(pdata12_sts))
