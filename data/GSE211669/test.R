@@ -86,3 +86,17 @@ tdf2 <- read.table(
     "data/tdf2.tsv",
     sep = "\t"
 )
+
+library(ggplot2)
+test_df <- read.table(
+    "data/test.tsv",
+    sep = "\t",
+    header = TRUE
+)
+ggplot(
+    data = test_df,
+    aes(x = group,
+        y = value,
+        color = group)
+)   +
+  geom_jitter()
