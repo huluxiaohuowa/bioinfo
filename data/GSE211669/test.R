@@ -158,3 +158,26 @@ pdata12_mts <- select(
 rownames(pdata12_sts)
 
 select(tdf1, rownames(pdata12_sts))
+
+library(xlsx)
+
+write.xlsx(
+    pdata12_sts,
+    "data/pdata1_2.xlsx",
+    sheetName = "STS",
+    append = TRUE
+)
+
+write.xlsx(
+    pdata12_mts,
+    "data/pdata1_2.xlsx",
+    sheetName = "MTS",
+    append = TRUE
+)
+
+write.xlsx(
+    pdata12_lts,
+    "data/pdata1_2.xlsx",
+    sheetName = "LTS",
+    append = TRUE
+)
